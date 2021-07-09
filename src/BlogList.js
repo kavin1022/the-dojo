@@ -1,14 +1,13 @@
-const BlogList = (props) => {
+const BlogList = ({blogs, title}) => {
     return(
         <div className="BlogList">
-            <h2>{props.title}</h2>
-            {props.blogs.map((blog) => (
-                <div className="blog-preview" key = {blog.id}>
-                    <h2>{blog.title}</h2>
-                    <p>Hello {blog.author}</p>
+            <h2>{title}</h2>
+            {blogs.map((x) => (
+                <div className="blog-preview" key = {x.id}>
+                    <h2>{x.title}</h2>
+                    <p>Hello {x.author}</p>
                 </div>
             ))}
-            
         </div>
         
     )

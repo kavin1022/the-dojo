@@ -1,16 +1,18 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import useFetch from "./useFetch";
 import BlogList from "./BlogList";
+{/* npx json-server --watch data/data.json --port 8000 */}
+
 const Home = () =>{
-    const [blogs, setBlogs] = useState([
-        { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
-        { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
-        { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
-      ]);
+
+    const {data: blogs, loadingMessage, error} = useFetch("http://localhost:8000/blogs");
+
 
     return(
         <div className="home">
-            <BlogList blogs={blogs} title="Ha! this is the dojo"/>
-            <BlogList blogs={blogs.filter((blog)=> blog.author === "mario")} title="Ha! this is the dojo's secert room"/>
+            {loadingMessage && <div>Loading...</div>}
+            {error != null && <div>{error}</div>}
+            {blogs && <BlogList blogs={blogs} title="Ha! this is the dojo"/>}
         </div>
     )
 }
